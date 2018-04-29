@@ -17,6 +17,7 @@ public class Missles : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Coll = gameObject.GetComponent<CapsuleCollider2D>();
+        SR = gameObject.GetComponent<SpriteRenderer>();
         explodes = false;
     }
 	
