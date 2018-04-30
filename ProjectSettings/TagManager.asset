@@ -9,6 +9,7 @@ TagManager:
   - Explosion
   - Enemy_Missle
   - Wall
+  - Item_Missle
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Sight
   - Player
   - Missle
-  - 
+  - Item
   - 
   - 
   - 

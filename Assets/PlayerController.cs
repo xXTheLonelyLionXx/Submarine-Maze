@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour {
     public Sprite Health1;
     public Text Enemies;
     public Text Message;
+    public GameObject Missle_1;
+    public GameObject Missle_2;
+    public GameObject Missle_3;
+    public GameObject Missle_4;
+    public GameObject Missle_5;
 
     private Rigidbody2D rb2d;
     private int life = 3;
@@ -26,6 +31,7 @@ public class PlayerController : MonoBehaviour {
     private string Enemies_Active_Text;
     private bool Message_In_or_Out;
     private int Fade;
+    private int ammo;
 
     // Use this for initialization
     void Start () {
@@ -33,10 +39,59 @@ public class PlayerController : MonoBehaviour {
         Health_Image = Health.GetComponent<Image>();
         Enemies_Start = GameObject.FindGameObjectsWithTag("Enemy").Length;
         Message_In_or_Out = true;
+        ammo = 5;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if(ammo > 5)
+        {
+            ammo = 5;
+        }
+        if(ammo == 5)
+        {
+            Missle_1.SetActive(true);
+            Missle_2.SetActive(true);
+            Missle_3.SetActive(true);
+            Missle_4.SetActive(true);
+            Missle_5.SetActive(true);
+        } else if (ammo == 4)
+        {
+            Missle_1.SetActive(true);
+            Missle_2.SetActive(true);
+            Missle_3.SetActive(true);
+            Missle_4.SetActive(true);
+            Missle_5.SetActive(false);
+        } else if (ammo == 3)
+        {
+            Missle_1.SetActive(true);
+            Missle_2.SetActive(true);
+            Missle_3.SetActive(true);
+            Missle_4.SetActive(false);
+            Missle_5.SetActive(false);
+        } else if (ammo == 2)
+        {
+            Missle_1.SetActive(true);
+            Missle_2.SetActive(true);
+            Missle_3.SetActive(false);
+            Missle_4.SetActive(false);
+            Missle_5.SetActive(false);
+        } else if (ammo == 1)
+        {
+            Missle_1.SetActive(true);
+            Missle_2.SetActive(false);
+            Missle_3.SetActive(false);
+            Missle_4.SetActive(false);
+            Missle_5.SetActive(false);
+        } else if (ammo == 0)
+        {
+            Missle_1.SetActive(false);
+            Missle_2.SetActive(false);
+            Missle_3.SetActive(false);
+            Missle_4.SetActive(false);
+            Missle_5.SetActive(false);
+        }
+
         Enemies_Active = GameObject.FindGameObjectsWithTag("Enemy").Length;
         SetEnemyText();
         transform.Rotate(0,0,-Input.GetAxis("Horizontal")/horizontal_speed);
@@ -54,9 +109,10 @@ public class PlayerController : MonoBehaviour {
             Health_Image.sprite = Health1;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && ammo > 0)
         {
             Shoot();
+            ammo--;
         }
 	}
 
@@ -80,6 +136,10 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.tag == "Enemy_Missle")
         {
             life--;
+        }
+        if(other.gameObject.tag == "Item_Missle")
+        {
+            ammo += 3;
         }
     }
     private void SetEnemyText()

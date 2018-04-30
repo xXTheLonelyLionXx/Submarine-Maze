@@ -16,6 +16,7 @@ public class Enemy_AI : MonoBehaviour {
     public GameObject Enemy_Missles;
     public int Shoot_Speed;
     public int rotation_speed;
+    public GameObject Ammo;
 
     private SpriteRenderer SR;
     private CapsuleCollider2D Coll;
@@ -120,6 +121,7 @@ public class Enemy_AI : MonoBehaviour {
             k++;
             if(k == death_speed)
             {
+                Instantiate(Ammo, transform.localPosition, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

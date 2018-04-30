@@ -164,8 +164,11 @@
 -define:ENABLE_VSTU
 -define:UNITY_PRO_LICENSE
 Assets/Enemy_AI.cs
+Assets/Missle_Collectible.cs
 Assets/Missles.cs
 Assets/PlayerController.cs
+Assets/Radar.cs
+Assets/Radar_Sight.cs
 Assets/Sight.cs
 -r:"C:\Program Files\UnityNew3DS_1_1_30\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
 -r:"C:\Program Files\UnityNew3DS_1_1_30\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"
