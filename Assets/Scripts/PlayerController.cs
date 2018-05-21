@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour {
     private int _fade;
     private int _ammo;
     private float _time;
+    private float _time_minutes;
+    private float _time_seconds;
+    private string _minutes;
+    private string _seconds;
 
 
 
@@ -41,7 +45,7 @@ public class PlayerController : MonoBehaviour {
         _enemiesStart = GameObject.FindGameObjectsWithTag("Enemy").Length;
         _messageInOrOut = true;
         _ammo = 5;
-        _time = 500 - Mathf.Round(Time.time);
+        _time = 180 - Mathf.Round(Time.time);
 	}
 	
 	// Update is called once per frame
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour {
         //UI_Texts Update
         _enemiesActive = GameObject.FindGameObjectsWithTag("Enemy").Length;
         SetEnemyText();
-        _time = 500 - Mathf.Round(Time.time);
+        _time = 180 - Mathf.Round(Time.time);
         SetTimeText();
 
         //Controls
@@ -171,6 +175,24 @@ public class PlayerController : MonoBehaviour {
     }
     private void SetTimeText()
     {
-        Timer.text = _time + "s";
+        _time_minutes = Mathf.Floor(_time / 60);
+        _time_seconds = _time % 60;
+        if(_time_minutes < 10)
+        {
+            _minutes = "0" + _time_minutes;
+        }
+        else
+        {
+            _minutes = _time_minutes.ToString();
+        }
+        if(_time_seconds < 10)
+        {
+            _seconds = "0" + _time_seconds;
+        }
+        else
+        {
+            _seconds = _time_seconds.ToString();
+        }
+        Timer.text = _minutes + ":" + _seconds;
     }
 }
