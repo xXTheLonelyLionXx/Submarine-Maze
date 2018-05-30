@@ -97,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 1340374011029060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2744645, y: 0.21870473, z: 0.97705543}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4559219303894466}
   - {fileID: 4435406709481140}
@@ -138,7 +138,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 30.9
+  m_Radius: 13.46
 --- !u!70 &70776548669403122
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -151,8 +151,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06, y: 0}
-  m_Size: {x: 1.71, y: 4.16}
+  m_Offset: {x: 0, y: -0.12}
+  m_Size: {x: 2.08, y: 2.28}
   m_Direction: 0
 --- !u!114 &114494225521845006
 MonoBehaviour:
@@ -177,23 +177,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef8673e8e2c4e94da6a85fab2a936b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertical_speed: 20
-  horizontal_speed: 1
-  rb2d_speed: 2
-  Text_Time: 100
+  VerticalSpeed: 0
+  HorizontalSpeed: 0
+  Rb2DSpeed: 0
+  TextTime: 0
   Missles: {fileID: 1748819958511888, guid: 7614109eafaf90444b2be2f96b50bf1d, type: 2}
-  Submarine_Position: {fileID: 4933382012923458}
+  SubmarinePosition: {fileID: 0}
   Health: {fileID: 0}
   Health3: {fileID: 21300000, guid: 6a2ed84b3c6adb74598de93fd1096ee7, type: 3}
   Health2: {fileID: 21300000, guid: 4066607150b0b1d40829f7ea2331a088, type: 3}
   Health1: {fileID: 21300000, guid: 6c1201d5957193041bfdd691d9d8d6fc, type: 3}
   Enemies: {fileID: 0}
+  Timer: {fileID: 0}
   Message: {fileID: 0}
-  Missle_1: {fileID: 0}
-  Missle_2: {fileID: 0}
-  Missle_3: {fileID: 0}
-  Missle_4: {fileID: 0}
-  Missle_5: {fileID: 0}
+  MissileCount: []
 --- !u!212 &212043662444182130
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     public Sprite Health2;
     public Sprite Health1;
     public Text Enemies;
+    public Text Timer;
     public Text Message;
 
     public GameObject[] MissileCount;
@@ -29,6 +30,11 @@ public class PlayerController : MonoBehaviour {
     private bool _messageInOrOut;
     private int _fade;
     private int _ammo;
+    private float _time;
+    private float _time_minutes;
+    private float _time_seconds;
+    private string _minutes;
+    private string _seconds;
 
 
 
@@ -39,6 +45,7 @@ public class PlayerController : MonoBehaviour {
         _enemiesStart = GameObject.FindGameObjectsWithTag("Enemy").Length;
         _messageInOrOut = true;
         _ammo = 5;
+        _time = 180 - Mathf.Round(Time.time);
 	}
 	
 	// Update is called once per frame
@@ -53,8 +60,13 @@ public class PlayerController : MonoBehaviour {
             MissileCount[i].SetActive(i <= _ammo - 1);
         }
 
+        //UI_Texts Update
         _enemiesActive = GameObject.FindGameObjectsWithTag("Enemy").Length;
         SetEnemyText();
+        _time = 180 - Mathf.Round(Time.time);
+        SetTimeText();
+
+        //Controls
         transform.Rotate(0,0,-Input.GetAxis("Horizontal")/HorizontalSpeed);
         transform.Translate(0, Input.GetAxis("Vertical")/VerticalSpeed, 0);
 
@@ -79,10 +91,12 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        //Physics
         Vector2 movement = new Vector2(0, Input.GetAxis("Vertical"));
         _rb2d.AddRelativeForce(movement * Rb2DSpeed);
     }
 
+    //Create Missle once shot
     private void Shoot()
     {
         Instantiate(Missles, SubmarinePosition.position, SubmarinePosition.rotation);
@@ -90,6 +104,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //Life lost
         if(other.gameObject.tag == "Explosion")
         {
             _life--;
@@ -98,11 +113,14 @@ public class PlayerController : MonoBehaviour {
         {
             _life--;
         }
+        //Ammo gained
         if(other.gameObject.tag == "Item_Missle")
         {
             _ammo += 3;
         }
     }
+
+    //UI_Texts
     private void SetEnemyText()
     {
         if(_enemiesStart-_enemiesActive == _enemiesStart)
@@ -154,5 +172,27 @@ public class PlayerController : MonoBehaviour {
             }
             Enemies.text = "Enemies " + _enemiesActiveText + "/" + _enemiesStartText;
         }
+    }
+    private void SetTimeText()
+    {
+        _time_minutes = Mathf.Floor(_time / 60);
+        _time_seconds = _time % 60;
+        if(_time_minutes < 10)
+        {
+            _minutes = "0" + _time_minutes;
+        }
+        else
+        {
+            _minutes = _time_minutes.ToString();
+        }
+        if(_time_seconds < 10)
+        {
+            _seconds = "0" + _time_seconds;
+        }
+        else
+        {
+            _seconds = _time_seconds.ToString();
+        }
+        Timer.text = _minutes + ":" + _seconds;
     }
 }
